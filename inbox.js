@@ -19,7 +19,7 @@ const activateNotifTab = () => {
     $("#messagesButton").removeClass("tabButtonStyle");
     $("#notificationContainer").addClass("block-display");
     $("#notificationContainer").removeClass("inactive");
-    $("#messagePreviewContainer").removeClass("grid-display");
+    $("#messagePreviewContainer").removeClass("block-display");
     $("#messagePreviewContainer").addClass("inactive");
     $("#newMsgButton").removeClass("block-display");
     $("#newMsgButton").addClass("inactive");
