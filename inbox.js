@@ -171,3 +171,30 @@ const searchFriends = () => {
 $(document).ready(() => {
     $("#friendSearchInput").keyup(searchFriends());
 })
+
+
+/* MESSAGE GENERATION */
+$(document).ready(() => {
+    $(".messagePreviewItem").on('click', generateConvo());
+    $(".friendItem").on('click', generateConvo());
+})
+
+generateConvo
+    getUserId
+    if var with userId does not exist, create new var
+        var obj = {
+            convoWith: "insert",
+            username: "insert",
+            userIcon: "",
+            messages: []
+        }
+        storage.push(obj)
+        buildConvo(obj)
+    else bring up existing
+        search arrray of objects for user-id of target
+            buildConvo(obj)
+
+    
+buildConvo(obj)
+    conversation.empty()
+    conversation.append(HTML HERE)
