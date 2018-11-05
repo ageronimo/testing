@@ -146,8 +146,21 @@ const sendTypedMsg = () => {
                 }
                 console.log(newMsg);
                 storage[i].messages.push(newMsg);
+                
+                //creates msg preview item
+                if ($(".messagePreviewItem").hasClass(`${storage[i].convoWith}`) == false) {
+                    console.log('creating new preview');
+                    addMsgPreview(storage[i], storage[i].messages[storage[i].messages.length - 1]);
+                } else {
+                    $(`.${storage[i].convoWith} .msgContent .time-ago`).empty();
+                    $(`.${storage[i].convoWith} .msgContent .time-ago`).html(`
+                        <span class="time-ago">1s ago</span>
+                    `);
+                    console.log('try again');
+                }
             }
         }
+        update();
     }
     scrollToBottom();
     $("#msgInput").val('');
@@ -159,15 +172,6 @@ $(document).keypress((key) => {
         sendTypedMsg();
     }
 })
-
-//return to Messages tab from Convo
-
-//show most recent message in message preview WIP
-const reMsgPreview = () => {
-    let lastMsg = $(".messageItem p").last().text();
-    console.log("last msg: " + lastMsg);
-}
-
 
 /* NEW MESSAGE FUNCTIONALITY */
 const searchFriends = () => {
@@ -293,3 +297,45 @@ function buildConvo(build) {
     `);
     buildMsgs(build);
 }
+
+$(document).ready(() => {
+    update();
+})
+
+function update() {
+    $(".messagePreviewItem").each(function () {
+        updateMsgPreview(this);
+    });
+}
+
+function updateMsgPreview(el) {
+    console.log(el);
+    var userId = $(el).attr('class').split(" ")[1];
+    console.log("id: ", userId);
+    for (var i = 0; i < storage.length; i++) {
+        if (Object.values(storage[i]).indexOf(userId) > -1) {
+            var obj = storage[i];
+            var lastMsg = obj.messages[obj.messages.length - 1].msgContent;
+            console.log(lastMsg);
+            $(`.${userId} .msgContent p`).empty();
+            $(`.${userId} .msgContent p`).html(`
+                <b class="user-name">${obj.username}</b>: ${lastMsg}
+            `);
+        }
+    }
+}
+
+function addMsgPreview(obj, lastMsg) {
+    $("#messagePreviewContainer").prepend(`
+    <div class="messagePreviewItem ${obj.convoWith}" onclick="generateConvo(this) activateConvo()">
+        <div class="user-icon">
+            <img src="${obj.userIcon}">
+        </div>
+        <div class="msgContent">
+            <p><b class="user-name">${obj.username}</b>: ${lastMsg}</p>
+            <span class="time-ago">1s ago</span>
+        </div>
+    </div>
+    `);
+}
+
