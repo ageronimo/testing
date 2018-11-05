@@ -28,6 +28,7 @@ const msgTemplate = {
 
 
 const nativeUserId = "user-id-4";
+
 var userId4_msg_userId2 = {
     convoWith: "user-id-2",
     username: "Lorem I.",
@@ -78,11 +79,11 @@ var userId4_msg_userId1 = {
     messages: [
         {
             sender: "user-id-1",
-            timeSent: "",
+            timeSent: "10/29/18 8:26am",
             msgContent: "Hi! I have some crayons that you might be interested in. A few colors might be missing though."
         }
     ]
 }
 
 // array of conversation objects
-var storage = [userId4_msg_userId1, userId4_msg_userId2];
+var storage = [userId4_msg_userId2, userId4_msg_userId1];
